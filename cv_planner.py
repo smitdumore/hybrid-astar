@@ -51,6 +51,8 @@ class Astar:
         self.robot_radius = robot_radius
         self.RPM_left = RPM_left
         self.RPM_right = RPM_right
+        self.RPM_left = 5
+        self.RPM_right = 10
         self.action_set = [[0, RPM_left],
                       [RPM_left, 0],
                       [RPM_left, RPM_left],
@@ -72,6 +74,7 @@ class Astar:
         
         src_x = self.start[0]
         src_y = self.start[1]
+        
         
         self.pq[(src_x, src_y)] = self.space[src_x, src_y].key
 
@@ -122,6 +125,9 @@ class Astar:
                                 or self.space[neigh_x, neigh_y].key > f_new:
 
                             self.update_neigh(neighbor, cv_backgroud, x, y, ori)
+
+        print("no path")
+        return []
                             
     def update_neigh(self, neighbor, cv_background, x, y, ori):
 
@@ -255,24 +261,38 @@ class Astar:
 
 
 
-def nav_main():
+def astar_planner():
+
+    #start_x = int(input("Enter start x coordinate"))
+    #start_y = int(input("Enter start y coordinate"))
+    #start_ori = int(input("Enter start orientation"))
 
     start_x   = 50
     start_y   = tab_height - 100
     start_ori = 0
 
+
+    #goal_x = int(input("Enter goal x coordinate"))
+    #goal_y = int(input("Enter goal y coordinate"))
+
     goal_x = 550
     goal_y = tab_height - 100
     goal_ori = 0
 
-    clearance = 5
+
+    goal_y = 20
+
+    clearance = int(input("enter clearance: "))
     robot_radius = 5
 
+    RPM_left = int(input("enter RPM1: "))
+    RPM_right = int(input("enter RPM2: "))
     RPM_left = 5
     RPM_right = 10
 
     start = np.array([start_x, start_y, start_ori])
     goal = np.array([goal_x, goal_y, goal_ori])
+
 
     space = inflate_obstacles(clearance, robot_radius)
 
@@ -287,5 +307,4 @@ def nav_main():
     return path
 
 
-    
-nav_main()
+#astar_planner()
