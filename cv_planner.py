@@ -41,6 +41,16 @@ def inflate_obstacles(clearance, robot_radius):
                 
     return graph
 
+def check_limits(l, r):
+    if(l < 5 or r < 5 or l > 10 or r > 10):
+        l = 5
+        r = 8
+        return l ,r
+    
+    if(l == r):
+        r = l +3
+
+    return l ,r
 
 class Astar:
     def __init__(self, start, goal, space, clearance, robot_radius, RPM_left, RPM_right):
@@ -169,7 +179,7 @@ class Astar:
 
         cv2_background = cv2.rotate(vis, cv2.ROTATE_90_COUNTERCLOCKWISE)
         cv2.imshow('A*', cv2_background)
-        cv2.waitKey(500)
+        cv2.waitKey(5000)
         cv2.destroyAllWindows()
     
 
@@ -263,48 +273,43 @@ class Astar:
 
 def astar_planner():
 
-    #start_x = int(input("Enter start x coordinate"))
-    #start_y = int(input("Enter start y coordinate"))
-    #start_ori = int(input("Enter start orientation"))
+    start_x = int(input("Enter start x coordinate: "))
+    start_y = int(input("Enter start y coordinate: "))
+    start_ori = int(input("Enter start orientation: "))
 
-    start_x   = 50
-    start_y   = tab_height - 100
-    start_ori = 0
-
-
-    #goal_x = int(input("Enter goal x coordinate"))
-    #goal_y = int(input("Enter goal y coordinate"))
-
-    goal_x = 550
-    goal_y = tab_height - 100
+    goal_x = int(input("Enter goal x coordinate: "))
+    goal_y = int(input("Enter goal y coordinate: "))
     goal_ori = 0
-
-
-    goal_y = 20
 
     clearance = int(input("enter clearance: "))
     robot_radius = 5
 
     RPM_left = int(input("enter RPM1: "))
     RPM_right = int(input("enter RPM2: "))
-    RPM_left = 5
-    RPM_right = 10
+    RPM_left, RPM_right = check_limits(RPM_left, RPM_right)
 
     start = np.array([start_x, start_y, start_ori])
     goal = np.array([goal_x, goal_y, goal_ori])
 
+    if get_inquality_obstacles(start_x, start_y, robot_radius + clearance):
+        print("Start in obstacle, exit")
+        return []
+    
+    if get_inquality_obstacles(goal_x, goal_y, robot_radius + clearance):
+        print("Goal in obstacle, exit")
+        return []
 
     space = inflate_obstacles(clearance, robot_radius)
 
     obj = Astar(start, goal, space, clearance, robot_radius, RPM_left, RPM_right)
 
     if not (obj.check_bounds(start_x, start_y) and obj.check_bounds(goal_x, goal_y)):
+        print("Start or Goal out of bounds. exit")
         return 
 
-    
     path = obj.search()
 
     return path
 
 
-#astar_planner()
+astar_planner()

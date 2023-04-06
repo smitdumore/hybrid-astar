@@ -39,9 +39,6 @@ class PathFollower:
         bearing_ori = math.atan((path[self.counter][1] - self.odom_y) / ((path[self.counter][0] - self.odom_x)))
         ori_error = (bearing_ori - (self.odom_yaw)) * 2
 
-        # if(abs(ori_error) > 1.0):
-        #     ori_error = 1.0
-
         self.cmd_vel.angular.z = ori_error
 
         if self.reached(path[self.counter]):
