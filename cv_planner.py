@@ -42,13 +42,17 @@ def inflate_obstacles(clearance, robot_radius):
     return graph
 
 def check_limits(l, r):
-    if(l < 5 or r < 5 or l > 10 or r > 10):
+    if(l < 5 and r < 5 or l > 10 and r > 10):
         l = 5
         r = 8
         return l ,r
     
     if(l == r):
         r = l +3
+
+    if(l <= 0.0 and r <= 0.0):
+        l = 0
+        r = 0
 
     return l ,r
 
@@ -119,7 +123,7 @@ class Astar:
             y = curr_cell[1]
             ori = self.space[x, y].orientation
 
-            cv2.circle(self.visited, (y, x), 15, 1, -1)
+            cv2.circle(self.visited, (y, x), 10, 1, -1)
 
             for neighbor in self.neighbors(x, y, ori):
 
@@ -282,10 +286,15 @@ def astar_planner():
     goal_ori = 0
 
     clearance = int(input("enter clearance: "))
-    robot_radius = 5
+    robot_radius = 10
 
     RPM_left = int(input("enter RPM1: "))
     RPM_right = int(input("enter RPM2: "))
+
+    if(RPM_left <= 0.0 and RPM_right <= 0.0):
+        print("robot cant move no rpm")
+        return []
+    
     RPM_left, RPM_right = check_limits(RPM_left, RPM_right)
 
     start = np.array([start_x, start_y, start_ori])
@@ -312,4 +321,4 @@ def astar_planner():
     return path
 
 
-astar_planner()
+#astar_planner()
