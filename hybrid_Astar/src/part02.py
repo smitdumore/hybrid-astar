@@ -4,7 +4,7 @@ import numpy as np
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist
 import math
-from cv_planner import astar_planner
+from planner_class import astar_planner
 import tf.transformations as tf
 from tf.transformations import euler_from_quaternion as convert_ang
 
@@ -58,7 +58,8 @@ class PathFollower:
         path = np.asarray(path, dtype=np.float64)
 
         if len(path) == 0:
-            print("no valid path found, exit")
+            print("\nno valid path found, EXITING. wait ...\n")
+            path_follower.run()
             return
 
         for point in path:

@@ -1,5 +1,5 @@
 <launch>
-  <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="model" default="burger" doc="model type [burger, waffle, waffle_pi]"/>
   <arg name="x_pos" default="0.0"/>
   <arg name="y_pos" default="0.0"/>
   <arg name="z_pos" default="0.0"/>
@@ -19,7 +19,7 @@
  
  
   <!-- Run the controller node -->
-  <node name="my_node" pkg="hybrid_Astar" type="class_control.py" output="screen" />
+  <node name="my_node" pkg="hybrid_Astar" type="part02.py" output="screen" />
 
 
 </launch>

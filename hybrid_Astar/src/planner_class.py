@@ -2,6 +2,7 @@
 import numpy as np
 import math
 import cv2
+import time
 
 class Cell:
     def __init__(self, key, cost_to_go, orientation, back_ptr, pid):
@@ -112,7 +113,7 @@ class Astar:
                 if get_inquality_obstacles(x,y,0):
                     cv_backgroud[x][y] = self.blue
         
-        print("planning ...")
+        print("\nPLANNING ...\n")
 
         while(len(self.pq)):
 
@@ -277,6 +278,12 @@ class Astar:
 
 def astar_planner():
 
+    
+    time.sleep(5)
+
+    print("\n\n#################################")
+    print("#### PROVIDE INUTS FOR ASTAR ####")
+    print("################################\n\n")
     start_x = int(input("Enter start x coordinate: "))
     start_y = int(input("Enter start y coordinate: "))
     start_ori = int(input("Enter start orientation: "))
@@ -319,6 +326,3 @@ def astar_planner():
     path = obj.search()
 
     return path
-
-
-astar_planner()
