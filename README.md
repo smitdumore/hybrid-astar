@@ -28,15 +28,21 @@ https://github.com/smitdumore/hybrid-astar
 
 ## How to run code for PART 01
 ```
-cd Part01/
-python3 cv_planner.py
+cd your_ros1_ws/src
+git clone https://github.com/smitdumore/hybrid-astar.git
+cd hybrid-astar/hybrid_Astar/src
+python3 part01.py
 ```
 
 ## How to run code for PART 02
 ```
-cd Part02/src
+cd your_ros1_ws/src
+git clone https://github.com/smitdumore/hybrid-astar.git
+cd ..
+catkin_make
+source devel/setup.bash
 
-
+roslaunch hybrid_Astar a_star.launch
 ```
 
 ## Sample input for Part 01
