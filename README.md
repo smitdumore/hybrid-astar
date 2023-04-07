@@ -42,18 +42,33 @@ cd ..
 catkin_make
 source devel/setup.bash
 
-roslaunch hybrid_Astar a_star.launch
+cd /src/hybrid-astar/hybrid_Astar/launch
+
+roslaunch a_star.launch
 ```
 
 ## Sample input for Part 01
 
-Enter start x coordinate: 30
-Enter start y coordinate: 30
-Enter start orientation: 0
-Enter goal x coordinate: 550
-Enter goal y coordinate: 30
-enter clearance: 5
-enter RPM1: 5
-enter RPM2: 5
+Enter start x coordinate: 30 <br />
+Enter start y coordinate: 30 <br />
+Enter start orientation: 0 <br />
+Enter goal x coordinate: 550 <br />
+Enter goal y coordinate: 30 <br />
+enter clearance: 5 <br />
+enter RPM1: 5 <br />
+enter RPM2: 5 <br />
 
 ## Sample input for Part 02
+
+#################################
+#### PROVIDE INUTS FOR ASTAR ####
+################################
+
+
+Enter start x coordinate: 50 <br />
+Enter start y coordinate: 100 <br />
+Enter start orientation: 0 <br />
+Enter goal x coordinate: 550 <br />
+Enter goal y coordinate: 100 <br />
+
+PLANNING ...

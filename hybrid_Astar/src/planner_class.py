@@ -124,7 +124,7 @@ class Astar:
             y = curr_cell[1]
             ori = self.graph[x, y].orientation
 
-            cv2.circle(self.visited, (y, x), 10, 1, -1)
+            cv2.circle(self.visited, (y, x), 15, 1, -1)
 
             for neighbor in self.neighbors(x, y, ori):
 
@@ -292,11 +292,11 @@ def astar_planner():
     goal_y = int(input("Enter goal y coordinate: "))
     goal_ori = 0
 
-    clearance = int(input("enter clearance: "))
+    clearance = 5
     robot_radius = 10
 
-    RPM_left = int(input("enter RPM1: "))
-    RPM_right = int(input("enter RPM2: "))
+    RPM_left = 5
+    RPM_right = 5
 
     if(RPM_left <= 0.0 and RPM_right <= 0.0):
         print("robot cant move no rpm")

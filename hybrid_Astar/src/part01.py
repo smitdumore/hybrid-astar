@@ -123,7 +123,7 @@ class Astar:
             y = curr_cell[1]
             ori = self.graph[x, y].orientation
 
-            cv2.circle(self.visited, (y, x), 10, 1, -1)
+            cv2.circle(self.visited, (y, x), 15, 1, -1)
 
             for neighbor in self.neighbors(x, y, ori):
 
